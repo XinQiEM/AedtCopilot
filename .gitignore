@@ -1,0 +1,12 @@
+.venv/
+.env
+data/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+frontend/node_modules/
+frontend/.next/
+*.aedt
+*.aedtresults
+*.lock

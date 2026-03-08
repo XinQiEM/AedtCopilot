@@ -1,0 +1,290 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 780" width="920" height="780" font-family="'Segoe UI', Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="920" height="780" fill="#0f1117" rx="12"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TITLE -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <text x="460" y="36" text-anchor="middle" fill="#e2e8f0" font-size="18" font-weight="700" letter-spacing="1">AedtCopilot — System Architecture</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 1: BROWSER / FRONTEND -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="220" y="56" width="480" height="88" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="460" y="76" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="700" letter-spacing="1">BROWSER  ·  Next.js 14 + TypeScript  (localhost:3000)</text>
+
+  <!-- Three sub-boxes in frontend -->
+  <rect x="240" y="83" width="130" height="48" rx="6" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1"/>
+  <text x="305" y="102" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="600">ChatPanel</text>
+  <text x="305" y="116" text-anchor="middle" fill="#93c5fd" font-size="9">对话流 · Token 流式渲染</text>
+  <text x="305" y="127" text-anchor="middle" fill="#93c5fd" font-size="9">工具调用指示 · 消息持久化</text>
+
+  <rect x="385" y="83" width="150" height="48" rx="6" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1"/>
+  <text x="460" y="102" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="600">ResultPanel</text>
+  <text x="460" y="116" text-anchor="middle" fill="#93c5fd" font-size="9">S参数曲线 · 方向图  (Plotly.js)</text>
+  <text x="460" y="127" text-anchor="middle" fill="#93c5fd" font-size="9">仿真进度条 · 结果可视化</text>
+
+  <rect x="550" y="83" width="130" height="48" rx="6" fill="#1e3a5f" stroke="#60a5fa" stroke-width="1"/>
+  <text x="615" y="102" text-anchor="middle" fill="#bfdbfe" font-size="10" font-weight="600">HfssStatusBar</text>
+  <text x="615" y="116" text-anchor="middle" fill="#93c5fd" font-size="9">HFSS 连接状态</text>
+  <text x="615" y="127" text-anchor="middle" fill="#93c5fd" font-size="9">LLM Provider 信息</text>
+
+  <!-- Arrow: Frontend → Backend -->
+  <line x1="460" y1="144" x2="460" y2="164" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="455,160 465,160 460,168" fill="#4b5563"/>
+  <text x="500" y="158" fill="#6b7280" font-size="9">WebSocket /ws/chat</text>
+  <text x="500" y="168" fill="#6b7280" font-size="9">REST /health  /llm/config</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 2: FASTAPI BACKEND -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="115" y="172" width="690" height="72" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="460" y="191" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="700" letter-spacing="1">FastAPI Backend  (127.0.0.1:8000)</text>
+
+  <rect x="130" y="198" width="148" height="36" rx="5" fill="#2d1b69" stroke="#7c3aed" stroke-width="1"/>
+  <text x="204" y="213" text-anchor="middle" fill="#ddd6fe" font-size="9" font-weight="600">lifespan</text>
+  <text x="204" y="225" text-anchor="middle" fill="#c4b5fd" font-size="8">HFSS COM 初始化</text>
+  <text x="204" y="235" text-anchor="middle" fill="#c4b5fd" font-size="8">RAG 向量库加载</text>
+
+  <rect x="292" y="198" width="145" height="36" rx="5" fill="#2d1b69" stroke="#7c3aed" stroke-width="1"/>
+  <text x="364" y="213" text-anchor="middle" fill="#ddd6fe" font-size="9" font-weight="600">SessionManager</text>
+  <text x="364" y="225" text-anchor="middle" fill="#c4b5fd" font-size="8">COM 连接生命周期</text>
+  <text x="364" y="235" text-anchor="middle" fill="#c4b5fd" font-size="8">健康检查 /health</text>
+
+  <rect x="451" y="198" width="145" height="36" rx="5" fill="#2d1b69" stroke="#7c3aed" stroke-width="1"/>
+  <text x="523" y="213" text-anchor="middle" fill="#ddd6fe" font-size="9" font-weight="600">LLM Factory</text>
+  <text x="523" y="225" text-anchor="middle" fill="#c4b5fd" font-size="8">多 Provider 统一构建</text>
+  <text x="523" y="235" text-anchor="middle" fill="#c4b5fd" font-size="8">运行时热切换 /llm/config</text>
+
+  <rect x="610" y="198" width="178" height="36" rx="5" fill="#2d1b69" stroke="#7c3aed" stroke-width="1"/>
+  <text x="699" y="210" text-anchor="middle" fill="#ddd6fe" font-size="9" font-weight="600">LLM Providers</text>
+  <text x="699" y="222" text-anchor="middle" fill="#c4b5fd" font-size="8">OpenAI · Azure · Anthropic</text>
+  <text x="699" y="232" text-anchor="middle" fill="#c4b5fd" font-size="8">DeepSeek · Qwen · Ollama …</text>
+
+  <!-- Arrow: Backend → LangGraph -->
+  <line x1="460" y1="244" x2="460" y2="262" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="455,258 465,258 460,266" fill="#4b5563"/>
+  <text x="468" y="258" fill="#6b7280" font-size="9">astream_events v2</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 3: LANGGRAPH ORCHESTRATOR -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="115" y="270" width="690" height="60" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="280" y="289" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="700" letter-spacing="1">LangGraph Orchestrator  (StateGraph)</text>
+
+  <rect x="130" y="296" width="105" height="26" rx="4" fill="#451a03" stroke="#d97706" stroke-width="1"/>
+  <text x="182" y="307" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="600">fetch_rag_context</text>
+  <text x="182" y="317" text-anchor="middle" fill="#fcd34d" font-size="8">ChromaDB检索</text>
+
+  <rect x="248" y="296" width="95" height="26" rx="4" fill="#451a03" stroke="#d97706" stroke-width="1"/>
+  <text x="295" y="307" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="600">classify_intent</text>
+  <text x="295" y="317" text-anchor="middle" fill="#fcd34d" font-size="8">LLM意图分类</text>
+
+  <rect x="356" y="296" width="55" height="26" rx="4" fill="#451a03" stroke="#d97706" stroke-width="1"/>
+  <text x="383" y="307" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="600">route()</text>
+  <text x="383" y="317" text-anchor="middle" fill="#fcd34d" font-size="8">条件路由</text>
+
+  <!-- Arrow labels for intent types -->
+  <text x="460" y="300" fill="#f59e0b" font-size="8.5">geometry · simulation</text>
+  <text x="460" y="311" fill="#f59e0b" font-size="8.5">postprocess · array · general</text>
+
+  <!-- Separator -->
+  <line x1="422" y1="295" x2="422" y2="324" stroke="#374151" stroke-width="1"/>
+
+  <!-- AppState -->
+  <rect x="630" y="296" width="155" height="26" rx="4" fill="#1c1917" stroke="#78716c" stroke-width="1"/>
+  <text x="707" y="307" text-anchor="middle" fill="#d6d3d1" font-size="9" font-weight="600">AppState (TypedDict)</text>
+  <text x="707" y="317" text-anchor="middle" fill="#a8a29e" font-size="8">messages · intent · rag_context</text>
+
+  <!-- Arrows to agents -->
+  <line x1="230" y1="330" x2="175" y2="348" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="310" y1="330" x2="338" y2="348" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="383" y1="330" x2="500" y2="348" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="400" y1="330" x2="662" y2="348" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,2"/>
+  <polygon points="171,344 179,344 175,351" fill="#f59e0b"/>
+  <polygon points="334,344 342,344 338,351" fill="#f59e0b"/>
+  <polygon points="496,344 504,344 500,351" fill="#f59e0b"/>
+  <polygon points="658,344 666,344 662,351" fill="#f59e0b"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 4: FOUR DOMAIN AGENTS -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="115" y="350" width="160" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="195" y="368" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="700">Geometry Agent</text>
+  <text x="195" y="381" text-anchor="middle" fill="#34d399" font-size="8">create_box / cylinder / sphere</text>
+  <text x="195" y="392" text-anchor="middle" fill="#34d399" font-size="8">subtract_objects</text>
+  <text x="195" y="403" text-anchor="middle" fill="#34d399" font-size="8">assign_material</text>
+  <text x="195" y="414" text-anchor="middle" fill="#34d399" font-size="8">list_objects · import_cad_file</text>
+  <text x="195" y="427" text-anchor="middle" fill="#6ee7b7" font-size="8" font-style="italic">7 tools</text>
+  <text x="195" y="437" text-anchor="middle" fill="#6b7280" font-size="8">AgentExecutor max_iter=10</text>
+
+  <rect x="285" y="350" width="160" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="365" y="368" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="700">Simulation Agent</text>
+  <text x="365" y="381" text-anchor="middle" fill="#34d399" font-size="8">create_solution_setup</text>
+  <text x="365" y="392" text-anchor="middle" fill="#34d399" font-size="8">create_frequency_sweep</text>
+  <text x="365" y="403" text-anchor="middle" fill="#34d399" font-size="8">assign_radiation_boundary</text>
+  <text x="365" y="414" text-anchor="middle" fill="#34d399" font-size="8">assign_lumped_port · plane_wave</text>
+  <text x="365" y="424" text-anchor="middle" fill="#34d399" font-size="8">run_simulation · convergence</text>
+  <text x="365" y="436" text-anchor="middle" fill="#6ee7b7" font-size="8" font-style="italic">7 tools</text>
+
+  <rect x="455" y="350" width="160" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="535" y="368" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="700">Postprocess Agent</text>
+  <text x="535" y="381" text-anchor="middle" fill="#34d399" font-size="8">get_s_parameters</text>
+  <text x="535" y="392" text-anchor="middle" fill="#34d399" font-size="8">get_far_field</text>
+  <text x="535" y="403" text-anchor="middle" fill="#34d399" font-size="8">S11/S21 dB · Phase</text>
+  <text x="535" y="414" text-anchor="middle" fill="#34d399" font-size="8">Far-field polar pattern</text>
+  <text x="535" y="427" text-anchor="middle" fill="#6ee7b7" font-size="8" font-style="italic">Plotly JSON output</text>
+  <text x="535" y="437" text-anchor="middle" fill="#6b7280" font-size="8">AgentExecutor max_iter=5</text>
+
+  <rect x="625" y="350" width="160" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="705" y="368" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="700">Array Agent</text>
+  <text x="705" y="381" text-anchor="middle" fill="#34d399" font-size="8">synthesize_array</text>
+  <text x="705" y="392" text-anchor="middle" fill="#34d399" font-size="8">uniform / chebyshev / taylor</text>
+  <text x="705" y="403" text-anchor="middle" fill="#34d399" font-size="8">hamming / binomial / cosine</text>
+  <text x="705" y="414" text-anchor="middle" fill="#34d399" font-size="8">apply_array_excitation</text>
+  <text x="705" y="427" text-anchor="middle" fill="#6ee7b7" font-size="8" font-style="italic">AF &amp; beam steering</text>
+  <text x="705" y="437" text-anchor="middle" fill="#6b7280" font-size="8">AgentExecutor max_iter=8</text>
+
+  <!-- Arrows: Agents → HFSS Function Layer -->
+  <line x1="195" y1="440" x2="195" y2="458" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="365" y1="440" x2="365" y2="458" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="535" y1="440" x2="535" y2="458" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="705" y1="440" x2="705" y2="458" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="190,454 200,454 195,461" fill="#4b5563"/>
+  <polygon points="360,454 370,454 365,461" fill="#4b5563"/>
+  <polygon points="530,454 540,454 535,461" fill="#4b5563"/>
+  <polygon points="700,454 710,454 705,461" fill="#4b5563"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 5: HFSS FUNCTION LAYER -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="115" y="462" width="690" height="66" rx="8" fill="#1e293b" stroke="#f97316" stroke-width="1.5"/>
+  <text x="460" y="481" text-anchor="middle" fill="#fdba74" font-size="11" font-weight="700" letter-spacing="1">HFSS Function Layer  ·  backend/hfss/</text>
+
+  <rect x="130" y="488" width="148" height="30" rx="5" fill="#431407" stroke="#ea580c" stroke-width="1"/>
+  <text x="204" y="500" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="600">geometry.py</text>
+  <text x="204" y="512" text-anchor="middle" fill="#fb923c" font-size="8">坐标 · 尺寸 · 材料</text>
+
+  <rect x="292" y="488" width="148" height="30" rx="5" fill="#431407" stroke="#ea580c" stroke-width="1"/>
+  <text x="366" y="500" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="600">simulation.py</text>
+  <text x="366" y="512" text-anchor="middle" fill="#fb923c" font-size="8">边界 · 激励 · 求解器</text>
+
+  <rect x="454" y="488" width="148" height="30" rx="5" fill="#431407" stroke="#ea580c" stroke-width="1"/>
+  <text x="528" y="500" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="600">postprocess.py</text>
+  <text x="528" y="512" text-anchor="middle" fill="#fb923c" font-size="8">S参数 · 方向图提取</text>
+
+  <rect x="616" y="488" width="148" height="30" rx="5" fill="#431407" stroke="#ea580c" stroke-width="1"/>
+  <text x="690" y="500" text-anchor="middle" fill="#fed7aa" font-size="9" font-weight="600">array_design.py</text>
+  <text x="690" y="512" text-anchor="middle" fill="#fb923c" font-size="8">阵列综合算法</text>
+
+  <!-- Arrow: Function Layer → COM Client -->
+  <line x1="460" y1="528" x2="460" y2="546" stroke="#f97316" stroke-width="2" stroke-dasharray="4,2"/>
+  <polygon points="455,542 465,542 460,549" fill="#f97316"/>
+  <text x="468" y="541" fill="#f97316" font-size="9">win32com · pythoncom.CoInitialize()</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 6: COM CLIENT -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="200" y="552" width="520" height="52" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="460" y="570" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="700" letter-spacing="1">HfssClient  (com_client.py)</text>
+  <text x="460" y="585" text-anchor="middle" fill="#f87171" font-size="9">Singleton · _get_desktop() 每线程 Dispatch() 新代理（解决跨线程 COM 单元问题）</text>
+  <text x="460" y="597" text-anchor="middle" fill="#f87171" font-size="9">get_design() · get_editor() · ensure_project()</text>
+
+  <!-- Arrow: COM Client → HFSS -->
+  <line x1="460" y1="604" x2="460" y2="622" stroke="#ef4444" stroke-width="2"/>
+  <polygon points="455,618 465,618 460,625" fill="#ef4444"/>
+  <text x="480" y="616" fill="#ef4444" font-size="9">COM  AnsoftHfss.HfssScriptInterface</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 7: HFSS SOFTWARE -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="270" y="626" width="380" height="56" rx="8" fill="#1c0505" stroke="#dc2626" stroke-width="2"/>
+  <text x="460" y="648" text-anchor="middle" fill="#fecaca" font-size="13" font-weight="700" letter-spacing="1.5">ANSYS HFSS 19.5</text>
+  <text x="460" y="663" text-anchor="middle" fill="#f87171" font-size="9">AEDT 2019 R3  ·  oDesktop → oProject → oDesign</text>
+  <text x="460" y="675" text-anchor="middle" fill="#f87171" font-size="9">BoundarySetup · ReportSetup · 3D Modeler</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SIDE PANEL: RAG -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="18" y="270" width="85" height="150" rx="7" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5"/>
+  <text x="60" y="287" text-anchor="middle" fill="#67e8f9" font-size="9.5" font-weight="700">RAG Module</text>
+  <line x1="18" y1="293" x2="103" y2="293" stroke="#164e63" stroke-width="1"/>
+  <text x="60" y="307" text-anchor="middle" fill="#22d3ee" font-size="8.5" font-weight="600">build_index.py</text>
+  <text x="60" y="318" text-anchor="middle" fill="#67e8f9" font-size="8">PDF → chunks</text>
+  <text x="60" y="329" text-anchor="middle" fill="#67e8f9" font-size="8">→ embeddings</text>
+  <line x1="25" y1="336" x2="96" y2="336" stroke="#164e63" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="60" y="348" text-anchor="middle" fill="#22d3ee" font-size="8.5" font-weight="600">retriever.py</text>
+  <text x="60" y="360" text-anchor="middle" fill="#67e8f9" font-size="8">query top-k</text>
+  <text x="60" y="371" text-anchor="middle" fill="#67e8f9" font-size="8">→ rag_context</text>
+  <line x1="25" y1="378" x2="96" y2="378" stroke="#164e63" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="60" y="390" text-anchor="middle" fill="#22d3ee" font-size="8.5" font-weight="600">ChromaDB</text>
+  <text x="60" y="401" text-anchor="middle" fill="#67e8f9" font-size="8">local vector DB</text>
+  <text x="60" y="412" text-anchor="middle" fill="#67e8f9" font-size="8">bge-small-en</text>
+
+  <!-- RAG → Orchestrator -->
+  <line x1="103" y1="345" x2="115" y2="330" stroke="#06b6d4" stroke-width="1" stroke-dasharray="4,2"/>
+  <polygon points="112,326 119,332 114,336" fill="#06b6d4"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SIDE PANEL: CONFIG -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="807" y="172" width="98" height="130" rx="7" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="856" y="189" text-anchor="middle" fill="#c4b5fd" font-size="9.5" font-weight="700">config.py</text>
+  <line x1="807" y1="195" x2="905" y2="195" stroke="#4c1d95" stroke-width="1"/>
+  <text x="856" y="208" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-weight="600">LLM Settings</text>
+  <text x="856" y="220" text-anchor="middle" fill="#c4b5fd" font-size="8">provider · model</text>
+  <text x="856" y="231" text-anchor="middle" fill="#c4b5fd" font-size="8">api_key · base_url</text>
+  <text x="856" y="242" text-anchor="middle" fill="#c4b5fd" font-size="8">temperature</text>
+  <line x1="815" y1="249" x2="898" y2="249" stroke="#4c1d95" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="856" y="261" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-weight="600">HFSS Settings</text>
+  <text x="856" y="272" text-anchor="middle" fill="#c4b5fd" font-size="8">install_path</text>
+  <text x="856" y="283" text-anchor="middle" fill="#c4b5fd" font-size="8">com_progid</text>
+  <line x1="815" y1="289" x2="898" y2="289" stroke="#4c1d95" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="856" y="299" text-anchor="middle" fill="#a78bfa" font-size="8.5" font-weight="600">.env file</text>
+
+  <!-- Config → Backend -->
+  <line x1="807" y1="218" x2="805" y2="218" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="807" y1="218" x2="807" y2="208" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- LEGEND -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <rect x="18" y="700" width="884" height="64" rx="6" fill="#111827" stroke="#374151" stroke-width="1"/>
+  <text x="44" y="716" fill="#9ca3af" font-size="9" font-weight="600">Legend</text>
+
+  <rect x="90" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="110" y="714" fill="#93c5fd" font-size="9">Frontend</text>
+
+  <rect x="170" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="190" y="714" fill="#c4b5fd" font-size="9">Backend</text>
+
+  <rect x="250" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="270" y="714" fill="#fcd34d" font-size="9">LangGraph</text>
+
+  <rect x="345" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="365" y="714" fill="#6ee7b7" font-size="9">Domain Agents</text>
+
+  <rect x="455" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#f97316" stroke-width="1.5"/>
+  <text x="475" y="714" fill="#fdba74" font-size="9">HFSS Functions</text>
+
+  <rect x="565" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="585" y="714" fill="#fca5a5" font-size="9">COM Interface</text>
+
+  <rect x="665" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5"/>
+  <text x="685" y="714" fill="#67e8f9" font-size="9">RAG / ChromaDB</text>
+
+  <rect x="780" y="705" width="14" height="10" rx="2" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="800" y="714" fill="#c4b5fd" font-size="9">Config</text>
+
+  <!-- second legend row -->
+  <line x1="90" y1="743" x2="110" y2="743" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="115" y="747" fill="#9ca3af" font-size="9">async data flow (WebSocket / astream_events)</text>
+
+  <line x1="380" y1="743" x2="400" y2="743" stroke="#ef4444" stroke-width="2"/>
+  <text x="405" y="747" fill="#9ca3af" font-size="9">COM call (synchronous, thread-per-call)</text>
+
+  <line x1="620" y1="743" x2="640" y2="743" stroke="#06b6d4" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="645" y="747" fill="#9ca3af" font-size="9">optional RAG context injection</text>
+
+</svg>
